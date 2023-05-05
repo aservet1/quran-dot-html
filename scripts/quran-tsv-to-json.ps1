@@ -1,9 +1,6 @@
 param (
     [Parameter(Mandatory=$true)]
-        [String]$quran_dot_tsv,
-
-    [Parameter(Mandatory=$false)]
-        [String]$outfile=$null
+        [String]$quran_dot_tsv
 )
 
 $Quran = [ordered]@{}
@@ -24,8 +21,4 @@ foreach (
     $Quran[$surah][$ayat] = $text
 }
 
-if ($outfile) {
-    ConvertTo-Json $Quran | Out-File $outfile
-} else {
-    ConvertTo-Json $Quran
-}
+return (ConvertTo-Json $Quran)
